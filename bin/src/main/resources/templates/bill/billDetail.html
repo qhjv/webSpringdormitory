@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+ 	
+</style>
+</head>
+<body>
+	<div align="center" style="margin: 40px auto">
+	<table cellspacing="4" border="1">
+		<tr>
+			<th>Họ và tên sinh viên: </th>
+			<td align="center"  th:text="${bill.student.name}"></td>
+		</tr>
+		<tr>
+			<th>Mã sinh viên: </th>
+			<td align="center"  th:text="${bill.student.studentCode}"></td>
+		</tr>
+		<tr>
+			<th>Lớp: </th>
+			<td align="center" th:text="${bill.student.className}"></td>
+		</tr>
+		<tr>
+			<th>Phòng: </th>
+			<td align="center" th:text="${bill.student.room.roomNumber}"></td>
+		</tr>
+		<tr>
+			<th>Tiền phòng: </th>
+			<td align="center" th:text="${bill.student.room.price}*1000"></td>
+		</tr>
+		<tr>
+			<th>Danh sách dịch vụ sử dụng : </th>
+			<td>
+				<table cellspacing="0px" border="1px">
+					<tr>
+						<th>Tên dịch vụ</th>
+						<th>Đơn giá</th>
+					</tr>
+					<tr th:each="service: ${bill.services}">
+						<td th:text="${service.name}"></td>
+						<td th:text="${service.price}*1000"></td>
+					</tr>
+					
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<th>Tổng số tiền cần thanh toán: </th>
+			<td align="center" th:text="${bill.totalPrice}*1000"></td>
+		</tr>
+		
+	</table>
+		<button style="margin: 120px auto">
+				<a style="text-decoration: none" th:href="@{/bill}">Về trang chủ</a>
+			</button>
+	</div>
+	
+	
+			
+	
+</body>
+</html>

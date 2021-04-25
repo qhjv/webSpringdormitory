@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sinh Viên</title>
+<link href="/css/style2.css" rel='stylesheet' type='text/css'
+	media="all" />
+</head>
+<body>
+	<div class="menu">
+			<span>
+			<img alt="" src="/images/iconmenu.png" width="15px" height="15px"></span> <span><a th:href="@{/}">Trang Chủ</a></span> 
+			<span><a th:href="@{/student}">Sinh Viên</a></span> 
+			<span><a th:href="@{/room}">Phòng</a></span> 
+		
+			<span><a th:href="@{/bill}">Hóa Đơn</a></span> 
+			<span><a th:href="@{/service}">Dịch vụ</a></span> 
+			<span><a th:href="@{/invite/show}">Khách Mời</a></span>
+
+		</div>
+	<div>
+		<form th:action=@{/ticket/search}  method="GET">
+			<input type="text" id="msv1" name="msv" placeholder="Nhập mã sinh viên"/>
+			<input type="submit" name="Search by student code" value="search by student code"  onclick="check()">
+		</form>
+		
+	</div>
+	<div class="nameTitle">
+	<h1>Danh sách sinh viên</h1>
+	</div>
+		<div class="table1">
+		<table>
+			<thead>
+				<th>Số thứ tự</th>
+				<th>Mã sinh viên</th>
+				<th>Họ và tên</th>
+				<th>Tên lớp</th>
+				<th>Số chứng minh thư</th>
+				<th>Quê quán</th>
+				<th>Phòng ở</th>
+				
+			</thead>
+			<tbody>
+			<tr th:each="student,state: ${students}" >		
+					<td align="right"><span th:text="${state.index}+1"></span></td>
+  					<td align="right"><span th:text="${student.studentCode}"></span></td>
+					<td align="right"><span th:text="${student.name}"></span></td>
+					<td align="right"><span th:text="${student.className}"></span></td>
+					<td align="right"><span th:text="${student.cmt}"></span></td>
+					<td align="right"><span th:text="${student.homeTown}"></span></td>
+					<td align="right"><span th:text="${student.room.roomNumber}"></span></td>
+					<td><a th:href="@{student/edit(id=${student.id})}">Edit</a>
+					&nbsp;&nbsp;&nbsp;&nbsp; 
+					<a th:href="@{/student/delete(id=${student.id})}">Delete</a>
+					&nbsp;&nbsp;&nbsp;&nbsp; 
+					<a th:if="${student.checkticket}" th:href="@{/ticket(id=${student.id})}"><button >Đăng Ký</button></a>
+					<a th:unless="${student.checkticket}" th:href="@{/ticket(id=${student.id})}"><button disabled >Đã Đăng Ký</button></a>
+					</td>
+			</tr>
+			</tbody>
+			
+		</table>
+		<br>
+		
+	<div>
+		<a th:href="@{/student/add}"> <button>Add Student</button></a></td>
+	</div>
+	
+	</div>
+	
+	
+	
+
+	<script>
+		function check(){
+			var value=document.getElementById("msv1").value;
+			if(value===""){
+				alert('Vui lòng nhập mã sinh viên');
+				
+			}
+		}
+	</script>
+</body>
+</html>
